@@ -1,0 +1,72 @@
+.navbar-default{
+    border: none;
+}
+.navbar-default .container-fluid{
+    background-color: #262626;
+    height: 80px;
+}
+
+.navbar-brand img{
+    width:120px;
+    margin-top:0px;
+}
+
+.navbar li a{
+    margin-top: 10px;
+    font-size: 17px;
+}
+
+.navbar li a:hover, .navbar li:after{
+    background-color: #262626 !important;
+    color: #ED1922 !important;
+}
+
+@media (min-width: 768px) {
+    .dropdown:hover .dropdown-menu {
+        display: block;
+    }
+}
+
+.dropdown li a{
+    margin-top: 0px;
+    font-size: 17px;
+}
+
+.dropdown-menu{
+    background-color: #3C3F41;
+}
+.dropdown-menu li a{
+    color: white;
+}
+.navbar-form{
+    margin-top: 20px;
+}
+
+body{
+    background-color: #EBEBEB;
+}
+
+.document{
+    background-color: white;
+    max-width: 1020px;
+    padding:50px 20px;
+    -webkit-box-shadow: 10px 10px 10px lightgray;
+    -moz-box-shadow: 10px 10px 10px lightgray;
+    box-shadow: 10px 10px 10px lightgray;
+    margin-bottom: 30px;
+}
+
+.note-editable {
+    height: 150px;
+}
+
+.top-20{
+    margin-top:20px;
+}
+.large-badge{
+    padding:10px;
+    font-size: 20px;
+    background-color: #46AEEA;
+    border-radius: 999px;
+    color: white;
+}

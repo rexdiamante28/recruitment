@@ -1,0 +1,118 @@
+<template name="users">
+    {{>nav}}
+    <div class="container">
+        <div class="document">
+            <legend>
+                <div class="row">
+                    <div class="col-xs-12">
+                        Users List
+                        <a href="adduser" class="btn btn-primary pull-right">New User</a>
+                    </div>
+                </div>
+            </legend>
+            {{> reactiveTable settings=users}}
+        </div>
+    </div>
+</template>
+
+<template name="useredit">
+    {{>nav}}
+    {{>imageModal}}
+    <div class="container">
+        <div class="document">
+            <div class="row">
+                <div class="col-xs-12">
+                    <legend>Photo</legend>
+                    <div class="col-xs-12">
+                        <div class="id-photo">
+                            <img src="{{avatar}}" id="image" class="point" data-toggle="modal" data-target="#imageModal">
+                        </div>
+                    </div>
+
+                    {{# autoForm collection="Users" doc=userdoc  id="updateUser" type="update"}}
+                        <legend><br/>Details</legend>
+                        <div class="col-sm-6">
+                            {{> afQuickField name='avatar' value=avatar type='hidden'}}
+                        </div>
+                        <div class="col-sm-6">
+                            {{> afQuickField name='cfsId' type='hidden'}}
+                        </div>
+                        <div class="col-sm-6">
+                            {{> afQuickField name='email'}}
+                        </div>
+                        <div class="col-sm-6">
+                            {{> afQuickField name='password'}}
+                        </div>
+                        <div class="col-sm-6">
+                            {{> afQuickField name='name'}}
+                        </div>
+                        <div class="col-sm-6">
+                            {{> afQuickField name='mobileNumber'}}
+                        </div>
+                        <div class="col-sm-6">
+                            {{> afQuickField name='Role'}}
+                        </div>
+                        <div class="col-sm-6">
+                            {{> afQuickField name='Status'}}
+                        </div>
+                        <div class="col-xs-12">
+                            <button type="submit" class="btn btn-primary" style="margin-top: 25px;">Submit</button>
+                        </div>
+                    {{/autoForm}}
+                </div>
+            </div>
+        </div>
+    </div>
+</template>
+
+
+
+<template name="adduser">
+    {{>nav}}
+    {{>imageModal}}
+    <div class="container">
+       <div class="document">
+           <div class="row">
+               <div class="col-xs-12">
+                   <legend>Photo</legend>
+                   <div class="col-xs-12">
+                       <div class="id-photo">
+                           <img src="{{avatar}}" id="image" class="point" data-toggle="modal" data-target="#imageModal">
+                       </div>
+                   </div>
+
+                   {{# autoForm collection="Users"  id="insertUser" type="insert"}}
+                       <legend><br/>Details</legend>
+                       <div class="col-sm-6">
+                           {{> afQuickField name='avatar' value=avatar type='hidden'}}
+                       </div>
+                       <div class="col-sm-6">
+                           {{> afQuickField name='cfsId' type='hidden'}}
+                       </div>
+                       <div class="col-sm-6">
+                           {{> afQuickField name='email'}}
+                       </div>
+                       <div class="col-sm-6">
+                           {{> afQuickField name='password'}}
+                       </div>
+                       <div class="col-sm-6">
+                           {{> afQuickField name='name'}}
+                       </div>
+                       <div class="col-sm-6">
+                           {{> afQuickField name='mobileNumber'}}
+                       </div>
+                       <div class="col-sm-6">
+                           {{> afQuickField name='Role'}}
+                       </div>
+                       <div class="col-sm-6">
+                           {{> afQuickField name='Status'}}
+                       </div>
+                       <div class="col-xs-12">
+                           <button type="submit" class="btn btn-primary" style="margin-top: 25px;">Submit</button>
+                       </div>
+                   {{/autoForm}}
+               </div>
+           </div>
+       </div>
+    </div>
+</template>

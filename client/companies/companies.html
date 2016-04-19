@@ -1,0 +1,45 @@
+<template name="companies">
+    {{>nav}}
+    <div class="container">
+        <div class="document">
+            {{>reactiveTable settings=companies}}
+        </div>
+    </div>
+</template>
+
+<template name="companyNew">
+    {{>nav}}
+    <div class="container">
+        <div class="document">
+            {{> quickForm collection="Companies" id="insertCompany" type="insert"}}
+        </div>
+    </div>
+</template>
+
+<template name="companyView">
+    {{>nav}}
+    <div class="container">
+        <div class="document">
+            <legend>
+                <div class="row">
+                    <div class="col-xs-12">
+                        {{CompanyProfile.Name}} ({{CompanyProfile.companyStatus}}) <a href="/companyEdit/{{CompanyProfile._id}}" class="pull-right btn btn-primary">Edit</a>
+                    </div>
+                </div>
+            </legend>
+
+            {{{CompanyProfile.Description}}}
+
+        </div>
+    </div>
+</template>
+
+<template name="companyEdit">
+    {{>nav}}
+    <div class="container">
+        <div class="document">
+
+            {{> quickForm collection="Companies" doc=Company id="updateCompany" type="update"}}
+        </div>
+    </div>
+</template>

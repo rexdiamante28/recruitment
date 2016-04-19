@@ -1,0 +1,35 @@
+<template name="hiringStages">
+    {{>nav}}
+    <div class="container">
+        <div class="document">
+            <legend>
+                <div class="row">
+                    <div class="col-xs-12">
+                        Hiring Stages
+                        <a href="/hiringStageNew" class="pull-right btn btn-primary">Add Stage</a>
+                    </div>
+                </div>
+            </legend>
+            {{>reactiveTable settings=Stages}}
+        </div>
+    </div>
+</template>
+
+
+<template name="hiringStageNew">
+    {{>nav}}
+    <div class="container">
+        <div class="document">
+            <legend>
+                <div class="row">
+                    <div class="col-xs-12">
+                        New Stage
+                        <a href="/hiringStages" class="pull-right btn btn-primary">Back To Stages</a>
+                    </div>
+                </div>
+            </legend>
+            {{> quickForm collection="HiringStages"  id="insertStage" type="insert"}}
+        </div>
+    </div>
+</template>
+
