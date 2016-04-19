@@ -6,13 +6,18 @@ Template.login.events({
         var password = template.find('#password').value;
 
         if(Users.findOne({email:email,password:password,Status:"Active"})){
-            Router.go('/careers');
+            Router.go('/dashboard');
 
             var user = Users.findOne({email:email,password:password,Status:"Active"});
             sessionStorage.setItem('user_Role', user.Role);
             sessionStorage.setItem('user_Id', user._id);
             sessionStorage.setItem('user_Name', user.name);
             sessionStorage.setItem('user_Avatar', user.avatar);
+
+            sessionStorage.setItem('user_CompanyType', Companies.findOne({_id: user.companyId}).Type);
+            sessionStorage.setItem('user_CompanyId', user.companyId);
+            sessionStorage.setItem('user_CompanyName', user.companyName);
+
         }
         else{
             alert("Invalid User");

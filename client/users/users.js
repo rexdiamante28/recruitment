@@ -10,6 +10,13 @@ Template.adduser.helpers({
         else{
             return Session.get('avatar');
         }
+    },
+    Company: function(){
+        var Company = {
+            companyId: sessionStorage.getItem('user_CompanyId'),
+            companyName: sessionStorage.getItem('user_CompanyName')
+        }
+        return Company;
     }
 })
 
@@ -33,7 +40,7 @@ Template.useredit.helpers({
 Template.users.helpers({
     users: function(){
         return {
-            collection: Users,
+            collection: Users.find({companyId:sessionStorage.getItem('user_CompanyId')}),
             rowsPerPage: 10,
             showFilter: true,
             fields: [

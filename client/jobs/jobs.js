@@ -2,6 +2,12 @@
  * Created by reinduque on 11/04/2016.
  */
 
+Template.jobsForm.helpers({
+    CompanyType: function () {
+        return sessionStorage.getItem('user_CompanyType');
+    }
+})
+
 Template.jobs.helpers({
     jobs: function () {
         return {

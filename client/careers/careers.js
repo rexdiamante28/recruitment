@@ -11,7 +11,7 @@ Template.careerview.helpers({
 Template.careers.helpers({
     careers: function () {
         return {
-            collection: Jobs,
+            collection: Jobs.find({Status: 'Open'}),
             rowsPerPage: 10,
             showFilter: true,
             fields: [

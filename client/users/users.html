@@ -101,11 +101,17 @@
                        <div class="col-sm-6">
                            {{> afQuickField name='mobileNumber'}}
                        </div>
-                       <div class="col-sm-6">
+                       <div class="col-sm-4">
                            {{> afQuickField name='Role'}}
                        </div>
-                       <div class="col-sm-6">
+                       <div class="col-sm-4">
                            {{> afQuickField name='Status'}}
+                       </div>
+                       <div class="col-sm-4">
+                           {{> afQuickField name='companyId' value=Company.companyId type=''}}
+                       </div>
+                       <div class="col-sm-4">
+                           {{> afQuickField name='companyName' value=Company.companyName type=''}}
                        </div>
                        <div class="col-xs-12">
                            <button type="submit" class="btn btn-primary" style="margin-top: 25px;">Submit</button>

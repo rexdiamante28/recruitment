@@ -1,8 +1,19 @@
 Meteor.startup(function(){
-    if(!Users.findOne({Role: 'Administrator'})){
+    if(!Companies.findOne({})){
+        var companyId = Companies.insert({
+            Name: 'Capstone Solutions Inc',
+            Description: 'Default Recruitment Company',
+            Type: 'Default',
+            companyStatus: 'Active'
+        })
+
+        company = Companies.findOne({_id:companyId});
+
         Users.insert({
             avatar:'/defaultavatar.png',
-            cfsId: '',
+            cfsId: 'asdasdasd',
+            companyId: companyId,
+            companyName: company.Name,
             email: 'admin@admin.com',
             password: '1234',
             name: 'Administrator',

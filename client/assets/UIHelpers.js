@@ -18,7 +18,7 @@ UI.registerHelper('inRole', function(allowedRoles) {
         var valid = false;
         var validRoles = allowedRoles.split(',');
         for(var a =0; a <validRoles.length; a++){
-            if(role == validRoles[a]){
+            if(role.trim() == validRoles[a].trim()){
                 valid = true;
             }
         }

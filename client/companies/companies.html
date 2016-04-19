@@ -11,7 +11,26 @@
     {{>nav}}
     <div class="container">
         <div class="document">
-            {{> quickForm collection="Companies" id="insertCompany" type="insert"}}
+            {{#autoForm collection="Companies" id="insertCompany"  type="insert"}}
+                <fieldset>
+                    <div class="col-xs-12">
+                        {{> afQuickField name='Name'}}
+                    </div>
+                    <div class="col-xs-12">
+                        {{> afQuickField name='Description'}}
+                    </div>
+                    <div class="col-sm-3">
+                        {{> afQuickField name='companyStatus'}}
+                    </div>
+                    <div class="col-sm-12">
+                        {{> afQuickField name='Type' value='Child' type='hidden'}}
+                    </div>
+                    <div class="col-sm-3">
+                        <button type="submit" class="btn btn-primary btn-block" style="margin-top: 25px;">Submit</button>
+                    </div>
+                </fieldset>
+
+            {{/autoForm}}
         </div>
     </div>
 </template>
@@ -27,9 +46,7 @@
                     </div>
                 </div>
             </legend>
-
             {{{CompanyProfile.Description}}}
-
         </div>
     </div>
 </template>
@@ -38,8 +55,23 @@
     {{>nav}}
     <div class="container">
         <div class="document">
+            {{#autoForm collection="Companies" doc=Company id="updateCompany" type="update"}}
+                <fieldset>
+                    <div class="col-xs-12">
+                        {{> afQuickField name='Name'}}
+                    </div>
+                    <div class="col-xs-12">
+                        {{> afQuickField name='Description'}}
+                    </div>
+                    <div class="col-sm-12">
+                        {{> afQuickField name='companyStatus'}}
+                    </div>
+                    <div class="col-sm-3">
+                        <button type="submit" class="btn btn-primary btn-block" style="margin-top: 25px;">Submit</button>
+                    </div>
+                </fieldset>
 
-            {{> quickForm collection="Companies" doc=Company id="updateCompany" type="update"}}
+            {{/autoForm}}
         </div>
     </div>
 </template>

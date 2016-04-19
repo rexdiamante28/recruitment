@@ -49,3 +49,12 @@ ValidateAccess = function(allowedRoles){
         return false;
     }
 }
+
+FormatDate = function(date,format){
+    return moment(date).format(format);
+}
+GetAge = function(birthday){
+    var ageDifMs = Date.now() - birthday.getTime();
+    var ageDate = new Date(ageDifMs); // miliseconds from epoch
+    return Math.abs(ageDate.getUTCFullYear() - 1970);
+}
