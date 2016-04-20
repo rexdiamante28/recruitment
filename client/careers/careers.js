@@ -1,6 +1,13 @@
-/**
- * Created by reinduque on 11/04/2016.
- */
+AutoForm.hooks({
+    insertApplicantForm: {
+        onSuccess: function (id,value) {
+            Router.go('/thanks');
+        }
+    }
+});
+
+
+
 Template.careerview.helpers({
    openJobs: function () {
        var docs= Jobs.find({_id:jobID});
@@ -16,8 +23,20 @@ Template.careers.helpers({
             showFilter: true,
             fields: [
                 { key: 'jobTitle', label: 'Job Title' },
-                { key: 'requiredHires', label: 'Needed' },
-                { key: 'hiredApplicants', label: 'Hired' },
+                {
+                    key: 'jobDescription',
+                    label: 'Job Description',
+                    fn: function (value) {
+                        return new Spacebars.SafeString(value);
+                    }
+                },
+                {
+                    key: 'jobQualification',
+                    label: 'Qualifications',
+                    fn: function (value) {
+                        return new Spacebars.SafeString(value);
+                    }
+                },
                 {
                     key: '_id',
                     label: 'View',

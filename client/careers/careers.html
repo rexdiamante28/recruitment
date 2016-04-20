@@ -19,7 +19,22 @@
                             </div>
                         </div>
                     </legend>
+                    <legend>
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <h4>Job Description</h4>
+                            </div>
+                        </div>
+                    </legend>
                     {{{jobDescription}}}
+                    <legend>
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <h4>Job Qualifications</h4>
+                            </div>
+                        </div>
+                    </legend>
+                    {{{jobQualification}}}
                     <div class="top-20">
                         <a class="btn btn-primary" href="/careers/{{_id}}">Apply Now</a>
                         <span class="large-badge pull-right">{{hiredApplicants}} / {{requiredHires}}</span>
@@ -173,4 +188,16 @@
 
 <template name="image_canvas">
     <img id="avatar-image"  alt="" class="col-lg-12">
+</template>
+
+
+<template name="thanks">
+    {{>nav}}
+    <div class="container">
+        <div class="document">
+            <div class="alert alert-success">
+                <h4 class="text-center">Thank you for submitting your application. We'll get in touch with  you soon</h4>
+            </div>
+        </div>
+    </div>
 </template>

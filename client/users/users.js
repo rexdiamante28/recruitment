@@ -20,6 +20,12 @@ Template.adduser.helpers({
     }
 })
 
+Template.adduser.events({
+    'click .company-radio': function(event){
+        $('input[name=companyName]').val(Companies.findOne({_id:event.currentTarget.value}).Name);
+    }
+})
+
 Template.useredit.helpers({
     userdoc: function(){
         return Users.findOne({_id:userId});
@@ -40,13 +46,13 @@ Template.useredit.helpers({
 Template.users.helpers({
     users: function(){
         return {
-            collection: Users.find({companyId:sessionStorage.getItem('user_CompanyId')}),
+            collection: Users,
             rowsPerPage: 10,
             showFilter: true,
             fields: [
                 { key: 'email', label: 'Email' },
-                { key: 'name', label: 'Name', sortOrder: 1, sortDirection: 'ascending'},
-                { key: 'mobileNumber', label: 'Mobile Number' },
+                { key: 'name', label: 'Name'},
+                { key: 'companyName', label: 'Company' ,sortOrder: 1, sortDirection: 'ascending' },
                 { key: 'Role', label: 'Role' },
                 { key: 'Status', label: 'Status' },
                 {

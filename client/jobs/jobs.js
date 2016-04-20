@@ -3,8 +3,14 @@
  */
 
 Template.jobsForm.helpers({
-    CompanyType: function () {
-        return sessionStorage.getItem('user_CompanyType');
+    Company: function () {
+        var company = {
+            CompanyType:sessionStorage.getItem('user_CompanyType'),
+            CompanyId:sessionStorage.getItem('user_CompanyId'),
+            User:sessionStorage.getItem('user_Name'),
+            CompanyName: sessionStorage.getItem('user_CompanyName')
+        }
+        return company;
     }
 })
 
@@ -16,9 +22,11 @@ Template.jobs.helpers({
             showFilter: true,
             fields: [
                 { key: 'jobTitle', label: 'Job Title' },
+                { key: 'companyName', label: 'Company' },
+                { key: 'createdBy', label: 'Created By' },
                 { key: 'requiredHires', label: 'Required Hires' },
                 { key: 'hiredApplicants', label: 'Hired Applicants' },
-                { key: 'Status', label: 'Status' },
+                { key: 'Status', label: 'Status',  },
                 {
                     key: '_id',
                     label: 'Edit',

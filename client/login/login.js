@@ -14,7 +14,7 @@ Template.login.events({
             sessionStorage.setItem('user_Name', user.name);
             sessionStorage.setItem('user_Avatar', user.avatar);
 
-            sessionStorage.setItem('user_CompanyType', Companies.findOne({_id: user.companyId}).Type);
+            sessionStorage.setItem('user_CompanyType', Companies.findOne({_id: user.companyId}).CompanyType);
             sessionStorage.setItem('user_CompanyId', user.companyId);
             sessionStorage.setItem('user_CompanyName', user.companyName);
 

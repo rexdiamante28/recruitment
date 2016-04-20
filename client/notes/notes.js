@@ -1,8 +1,9 @@
-Template.applicantnotes.helpers({
+Template.notesModal.helpers({
     commentor: function () {
         var user = {
             name: sessionStorage.getItem('user_Name'),
-            avatar: sessionStorage.getItem('user_Avatar')
+            avatar: sessionStorage.getItem('user_Avatar'),
+            company: sessionStorage.getItem('user_CompanyName')
         }
         return user;
     },

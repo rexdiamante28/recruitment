@@ -1,3 +1,11 @@
+AutoForm.hooks({
+    insertCompany: {
+        onSuccess: function (id,value) {
+            alert(id+value);
+        }
+    }
+});
+
 
 Template.companies.helpers({
     companies: function () {

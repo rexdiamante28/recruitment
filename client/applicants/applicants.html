@@ -19,6 +19,8 @@
 <template name="applicantResume">
     {{>nav}}
     {{>notesModal}}
+    {{>refer}}
+    {{>timeline}}
     <div class="container">
         <div class="document">
             <div class="row">
@@ -51,6 +53,8 @@
                                         {{/each}}
                                     </ul>
                                 </div>
+                                <a data-toggle="modal" data-target="#timelineModal" class="btn btn-primary btn-sm">Timeline</a>
+                                <a data-toggle="modal" data-target="#referModal" class="btn btn-primary btn-sm">Refer</a>
                                 <a href="/applicantEdit/{{Record._id}}" class="btn btn-primary btn-sm">Edit</a>
                                 <a data-toggle="modal" data-target="#notesModal" class="btn btn-primary btn-sm">Notes
                                     <span
@@ -203,7 +207,7 @@
                                 <tr>
                                     <td class="comment">
                                         <img src="{{avatar}}" class="note-avatar img-circle">
-                                        <label class="name">{{commentedBy}}</label>
+                                        <label class="name">{{commentedBy}} ({{company}})</label>
                                         <label class="pull-right text-muted">{{formatDate date 'MMMM-DD-YYYY'}}</label>
                                         <p><br/>{{{comment}}}</p>
                                     </td>
@@ -219,6 +223,9 @@
                                 </div>
                                 <div class="col-sm-3">
                                     {{> afQuickField name='commentedBy' value=commentor.name type="hidden"}}
+                                </div>
+                                <div class="col-sm-3">
+                                    {{> afQuickField name='company' value=commentor.company type="hidden"}}
                                 </div>
                                 <div class="col-sm-3">
                                     {{> afQuickField name='date' type="hidden"}}

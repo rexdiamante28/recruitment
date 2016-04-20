@@ -3,7 +3,7 @@ Meteor.startup(function(){
         var companyId = Companies.insert({
             Name: 'Capstone Solutions Inc',
             Description: 'Default Recruitment Company',
-            Type: 'Default',
+            CompanyType: 'Default',
             companyStatus: 'Active'
         })
 

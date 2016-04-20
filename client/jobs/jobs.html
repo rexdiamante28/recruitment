@@ -29,7 +29,7 @@
 </template>
 
 <template name="jobsEditForm">
-    {{#autoForm collection="Jobs" doc=thisDoc id="updateBookForm" id="insertJobForm" type="update"}}
+    {{#autoForm collection="Jobs" doc=thisDoc id="updateBookForm" id="updateJobForm" type="update"}}
         <fieldset>
             <div class="col-xs-12">
                 {{> afQuickField name='jobTitle'}}
@@ -62,6 +62,15 @@
     {{#autoForm collection="Jobs" id="insertJobForm" type="insert"}}
         <fieldset>
             <div class="col-xs-12">
+                {{> afQuickField name='companyId' value=Company.CompanyId type='hidden'}}
+            </div>
+            <div class="col-xs-12">
+                {{> afQuickField name='createdBy' value=Company.User type='hidden'}}
+            </div>
+            <div class="col-xs-12">
+                {{> afQuickField name='companyName' value=Company.CompanyName type='hidden'}}
+            </div>
+            <div class="col-xs-12">
                 {{> afQuickField name='jobTitle'}}
             </div>
             <div class="col-xs-12">
@@ -76,7 +85,7 @@
             <div class="col-sm-3">
                 {{> afQuickField name='hiredApplicants'}}
             </div>
-            {{#if equals CompanyType 'Default'}}
+            {{#if equals Company.CompanyType 'Default'}}
                 <div class="col-sm-3">
                     {{> afQuickField name='Status'}}
                 </div>
