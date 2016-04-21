@@ -5,21 +5,27 @@
                 <div class="modal-content">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
-                        <h4 class="modal-title">Choose Company / Companies</h4>
+                        <h4 class="modal-title">Timeline</h4>
                     </div>
                     <div class="modal-body">
                         <div class="row">
                             <div class="col-xs-12">
-                                {{#each Event}}
-                                    <div class="col-xs-12">
-                                        <label class="pull-right text-muted">{{formatDate date 'MMMM-DD-YYYY'}}</label>
-                                        <img src="{{userAvatar}}" class="note-avatar img-circle">
-                                        <label class="">{{user}}</label><br/>
-                                        <div class="col-xs-12 text-center">
-                                            {{{details}}}
-                                        </div>
-                                    </div>
-                                {{/each}}
+                                <table class="table table-striped">
+                                    <tbody>
+                                        {{#each Event}}
+                                            <tr>
+                                                <div class="col-xs-12 padd-10">
+                                                    <label class="pull-right text-muted">{{formatDate date 'MMMM-DD-YYYY'}}</label>
+                                                    <img src="{{userAvatar}}" class="note-avatar img-circle">
+                                                    <label class="">{{user}}</label><br/>
+                                                    <div class="col-xs-12">
+                                                        {{{details}}}
+                                                    </div>
+                                                </div>
+                                            </tr>
+                                        {{/each}}
+                                    </tbody>
+                                </table>
                             </div>
                         </div>
                     </div>
