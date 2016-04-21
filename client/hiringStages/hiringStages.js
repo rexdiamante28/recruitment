@@ -1,7 +1,7 @@
 Template.hiringStages.helpers({
     Stages: function(){
         return {
-            collection: HiringStages.find({CompanyId: sessionStorage.getItem('user_CompanyId')}),
+            collection: HiringStages,
             rowsPerPage: 10,
             showFilter: true,
             fields: [
@@ -21,11 +21,5 @@ Template.hiringStages.helpers({
                 }
             ]
         };
-    }
-})
-
-Template.hiringStageNew.helpers({
-    CompanyId: function(){
-        return sessionStorage.getItem('user_CompanyId');
     }
 })

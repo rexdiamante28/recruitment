@@ -3,7 +3,6 @@ Meteor.startup(function(){
         var companyId = Companies.insert({
             Name: 'Capstone Solutions Inc',
             Description: 'Default Recruitment Company',
-            CompanyType: 'Default',
             companyStatus: 'Active'
         })
 
@@ -12,8 +11,6 @@ Meteor.startup(function(){
         Users.insert({
             avatar:'/defaultavatar.png',
             cfsId: 'asdasdasd',
-            companyId: companyId,
-            companyName: company.Name,
             email: 'admin@admin.com',
             password: '1234',
             name: 'Administrator',

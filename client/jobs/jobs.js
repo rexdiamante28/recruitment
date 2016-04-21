@@ -1,14 +1,25 @@
-/**
- * Created by reinduque on 11/04/2016.
- */
+Template.jobsForm.events({
+    'change .form-control': function(event){
+        if(event.currentTarget.name==='companyId'){
+            $('#insertJobForm input[name=companyName]').val(Companies.findOne({_id:event.currentTarget.value}).Name);
+        }
+    }
+})
+
+Template.jobsEditForm.events({
+    'change .form-control': function(event){
+        if(event.currentTarget.name==='companyId'){
+            $('#updateJobForm input[name=companyName]').val(Companies.findOne({_id:event.currentTarget.value}).Name);
+        }
+    }
+})
+
+
 
 Template.jobsForm.helpers({
     Company: function () {
         var company = {
-            CompanyType:sessionStorage.getItem('user_CompanyType'),
-            CompanyId:sessionStorage.getItem('user_CompanyId'),
-            User:sessionStorage.getItem('user_Name'),
-            CompanyName: sessionStorage.getItem('user_CompanyName')
+            User:sessionStorage.getItem('user_Name')
         }
         return company;
     }
@@ -23,7 +34,6 @@ Template.jobs.helpers({
             fields: [
                 { key: 'jobTitle', label: 'Job Title' },
                 { key: 'companyName', label: 'Company' },
-                { key: 'createdBy', label: 'Created By' },
                 { key: 'requiredHires', label: 'Required Hires' },
                 { key: 'hiredApplicants', label: 'Hired Applicants' },
                 { key: 'Status', label: 'Status',  },

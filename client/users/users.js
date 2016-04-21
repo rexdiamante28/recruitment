@@ -51,8 +51,7 @@ Template.users.helpers({
             showFilter: true,
             fields: [
                 { key: 'email', label: 'Email' },
-                { key: 'name', label: 'Name'},
-                { key: 'companyName', label: 'Company' ,sortOrder: 1, sortDirection: 'ascending' },
+                { key: 'name', label: 'Name' ,sortOrder: 1, sortDirection: 'ascending'},
                 { key: 'Role', label: 'Role' },
                 { key: 'Status', label: 'Status' },
                 {

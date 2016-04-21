@@ -22,7 +22,7 @@
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Careers <span class="caret"></span></a>
                             <ul class="dropdown-menu">
-                                <li><a href="/careers">Job Posts</a></li>
+                                <li><a href="/careers">Job Posts (Open)</a></li>
                                 <li><a href="/jobs">Jobs List</a></li>
                                 {{#if inRole 'Administrator,Level 2'}}
                                     <li><a href="/jobsNew">Add a Job Requirement</a></li>
@@ -38,13 +38,11 @@
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Others <span class="caret"></span></a>
                             <ul class="dropdown-menu">
-                                {{#if equals CompanyType 'Default'}}
-                                    <li><a href="/companies">Companies</a></li>
+                                <li><a href="/companies">Companies</a></li>
                                     {{#if inRole 'Administrator,Level 2'}}
                                         <li><a href="/companyNew">Add Company</a></li>
                                     {{/if}}
                                 <li role="separator" class="divider"></li>
-                                {{/if}}
                                 <li><a href="/hiringStages">Hiring Stages</a></li>
                                 {{#if inRole 'Administrator,Level 2'}}
                                     <li><a href="/hiringStageNew">New Stage</a></li>
@@ -52,14 +50,12 @@
                             </ul>
                         </li>
                         {{#if inRole 'Administrator'}}
-                            {{#if equals CompanyType 'Default'}}
                                 <li class="dropdown">
                                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Users <span class="caret"></span></a>
                                     <ul class="dropdown-menu">
                                         <li><a href="/users">Users</a></li>
                                     </ul>
                                 </li>
-                            {{/if}}
                         {{/if}}
                         {{else}}
                         <li class><a href="/careers">Careers <span class="sr-only">(current)</span></a></li>

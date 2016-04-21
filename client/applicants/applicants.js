@@ -1,3 +1,38 @@
+AutoForm.hooks({
+    changeStatus: {
+        onSuccess: function (type, id) {
+            $('#statusModal').modal('hide');
+            var data = StatusChange.findOne({_id:id});
+
+            Applicants.update({_id:applicantId},{$set:{
+                companyAssignment:data.companyName,
+                applicantStatus:data.status
+            }})
+        }
+    }
+});
+
+Template.statusModal.helpers({
+    Data : function(){
+        var data = {
+            applicantId: applicantId,
+            user: sessionStorage.getItem('user_Name'),
+            userAvatar: sessionStorage.getItem('user_Avatar')
+        }
+
+        return data;
+    }
+})
+
+Template.statusModal.events({
+    'change .form-control': function(event){
+        if(event.currentTarget.name==='companyId'){
+            $('#changeStatus input[name=companyName]').val(Companies.findOne({_id:event.currentTarget.value}).Name);
+        }
+    }
+})
+
+
 Template.applicants.helpers({
     applicants: function () {
         return {
@@ -37,6 +72,16 @@ Template.applicantResume.helpers({
         return Notes.find({applicantID: applicantId}).count();
     }
 })
+
+Template.statusModal.helpers({
+    Status: function(){
+        return HiringStages.find({});
+    },
+    Companies: function(){
+        return Companies.find({});
+    }
+})
+
 
 Template.applicantResume.onRendered(function(){
     var url =  'http://localhost:3000/';

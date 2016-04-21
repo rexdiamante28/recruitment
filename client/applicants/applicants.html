@@ -21,6 +21,7 @@
     {{>notesModal}}
     {{>refer}}
     {{>timeline}}
+    {{>statusModal}}
     <div class="container">
         <div class="document">
             <div class="row">
@@ -33,7 +34,7 @@
                         </div>
                         <div class="col-sm-8">
                             <div class=" pull-right">
-                                <div class="btn-group">
+                                <!--<div class="btn-group">
                                     <button type="button" class="btn btn-primary btn-sm dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                         Assign to Company <span class="caret"></span>
                                     </button>
@@ -52,7 +53,8 @@
                                             <li id="{{Name}}" class="statusAction"><a>{{Name}}</a></li>
                                         {{/each}}
                                     </ul>
-                                </div>
+                                </div>-->
+                                <a data-toggle="modal" data-target="#statusModal" class="btn btn-primary btn-sm">Status</a>
                                 <a data-toggle="modal" data-target="#timelineModal" class="btn btn-primary btn-sm">Timeline</a>
                                 <a data-toggle="modal" data-target="#referModal" class="btn btn-primary btn-sm">Refer</a>
                                 <a href="/applicantEdit/{{Record._id}}" class="btn btn-primary btn-sm">Edit</a>
@@ -61,10 +63,11 @@
                                         class="badge">{{Notes}}</span></a>
                                 <a id="{{Record._id}}" class="btn btn-primary btn-sm pdf">PDF</a>
                                 <br/><br/>
+                                <legend>Application Status</legend>
                                 <div class="dl-horizontal">
-                                    <dt>Application Status</dt>
+                                    <dt>Status :</dt>
                                     <dd>{{Record.applicantStatus}}</dd>
-                                    <dt>Company Assignment</dt>
+                                    <dt>Company :</dt>
                                     <dd>{{Record.companyAssignment}}</dd>
                                 </div>
                             </div>
@@ -225,9 +228,6 @@
                                     {{> afQuickField name='commentedBy' value=commentor.name type="hidden"}}
                                 </div>
                                 <div class="col-sm-3">
-                                    {{> afQuickField name='company' value=commentor.company type="hidden"}}
-                                </div>
-                                <div class="col-sm-3">
                                     {{> afQuickField name='date' type="hidden"}}
                                 </div>
                                 <div class="col-sm-3">
@@ -241,6 +241,59 @@
                                 </div>
                             </fieldset>
                         {{/autoForm}}
+                    </div>
+                    <div class="modal-footer">
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</template>
+
+
+
+
+<template name="statusModal">
+    <div class="modal fade " id="statusModal">
+        <div class="modal-dialog">
+            <form class="form-horizontal">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
+                        <h4 class="modal-title">Status Change</h4>
+                    </div>
+                    <div class="modal-body">
+                                    {{#autoForm collection="StatusChange"  id="changeStatus" type="insert"}}
+                                        <fieldset>
+                                            <div class="col-sm-12">
+                                                {{> afQuickField name='applicantID' value=Data.applicantId  type="hidden"}}
+                                            </div>
+                                            <div class="col-sm-12">
+                                                {{> afQuickField name='status'  type=""}}
+                                            </div>
+                                            <div class="col-sm-12">
+                                                {{> afQuickField name='companyId' type=""}}
+                                            </div>
+                                            <div class="col-sm-12">
+                                                {{> afQuickField name='companyName' type="hidden"}}
+                                            </div>
+                                            <div class="col-sm-12">
+                                                {{> afQuickField name='user' value=Data.user  type="hidden"}}
+                                            </div>
+                                            <div class="col-sm-12">
+                                                {{> afQuickField name='userAvatar' value=Data.userAvatar  type="hidden"}}
+                                            </div>
+                                            <div class="col-sm-12">
+                                                {{> afQuickField name='date' type=""}}
+                                            </div>
+                                            <div class="col-sm-12">
+                                                {{> afQuickField name='dateInserted' type="hidden"}}
+                                            </div>
+                                            <div class="col-sm-12 no-padd">
+                                                <button type="submit" class="btn btn-primary">Submit</button>
+                                            </div>
+                                        </fieldset>
+                                    {{/autoForm}}
                     </div>
                     <div class="modal-footer">
                     </div>

@@ -29,8 +29,17 @@
 </template>
 
 <template name="jobsEditForm">
-    {{#autoForm collection="Jobs" doc=thisDoc id="updateBookForm" id="updateJobForm" type="update"}}
+    {{#autoForm collection="Jobs" doc=thisDoc id="updateJobForm" type="update"}}
         <fieldset>
+            <div class="col-xs-12">
+                {{> afQuickField name='createdBy' value=Company.User type='hidden' }}
+            </div>
+            <div class="col-xs-12">
+                {{> afQuickField name='companyId'}}
+            </div>
+            <div class="col-xs-12">
+                {{> afQuickField name='companyName' type='hidden'}}
+            </div>
             <div class="col-xs-12">
                 {{> afQuickField name='jobTitle'}}
             </div>
@@ -62,13 +71,13 @@
     {{#autoForm collection="Jobs" id="insertJobForm" type="insert"}}
         <fieldset>
             <div class="col-xs-12">
-                {{> afQuickField name='companyId' value=Company.CompanyId type='hidden'}}
+                {{> afQuickField name='createdBy' value=Company.User type='hidden' class='companyId' }}
             </div>
             <div class="col-xs-12">
-                {{> afQuickField name='createdBy' value=Company.User type='hidden'}}
+                {{> afQuickField name='companyId'}}
             </div>
             <div class="col-xs-12">
-                {{> afQuickField name='companyName' value=Company.CompanyName type='hidden'}}
+                {{> afQuickField name='companyName' type='hidden'}}
             </div>
             <div class="col-xs-12">
                 {{> afQuickField name='jobTitle'}}
@@ -85,15 +94,9 @@
             <div class="col-sm-3">
                 {{> afQuickField name='hiredApplicants'}}
             </div>
-            {{#if equals Company.CompanyType 'Default'}}
-                <div class="col-sm-3">
-                    {{> afQuickField name='Status'}}
-                </div>
-                {{else}}
-                <div class="col-sm-3">
-                    {{> afQuickField name='Status' type='hidden'}}
-                </div>
-            {{/if}}
+            <div class="col-sm-3">
+                {{> afQuickField name='Status'}}
+            </div>
             <div class="col-sm-3">
                 <button type="submit" class="btn btn-primary btn-block" style="margin-top: 25px;">Submit</button>
             </div>
