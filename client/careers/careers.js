@@ -1,7 +1,16 @@
 AutoForm.hooks({
     insertApplicantForm: {
-        onSuccess: function (id,value) {
+        onSuccess: function (type,id) {
             Router.go('/thanks');
+
+            var companyId = Jobs.findOne({_id:jobID}).companyId;
+
+            Applicants.update({_id:id},{
+                $set:{
+                    companyId:companyId,
+                    statusId:'null'
+                }
+            })
         }
     }
 });
@@ -58,6 +67,12 @@ Template.applyNow.helpers({
         else{
             return Session.get('avatar');
         }
+    },
+    jobId: function(){
+        return jobID;
+    },
+    Data: function(){
+        return Jobs.findOne({_id:jobID});
     }
 })
 
@@ -66,11 +81,6 @@ Template.applyNow.onCreated(function(){
 })
 
 Template.applyNow.onRendered(function (){
-    var doc = Jobs.findOne(jobID);
-    document.getElementsByName("positionApplied").item(0).value = doc.jobTitle;
-    document.getElementsByName("applicantStatus").item(0).value = "Unprocessed";
-    document.getElementsByName("applicantStatus").item(0).readOnly = true;
-
     $('#professionalExperience').hide();
     $('#technicalSkills').hide();
     $('#educationalHistory').hide();

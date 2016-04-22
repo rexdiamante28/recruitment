@@ -60,7 +60,10 @@
                             </div>
                         </div>
                         <div class="col-sm-6">
-                            {{> afQuickField name='avatar' value=avatar value=avatar type='hidden'}}
+                            {{> afQuickField name='jobId' value=jobId type='hidden'}}
+                        </div>
+                        <div class="col-sm-6">
+                            {{> afQuickField name='avatar' value=avatar  type='hidden'}}
                         </div>
                         <div class="col-sm-6">
                             {{> afQuickField name='cfsId' type='hidden'}}
@@ -72,13 +75,13 @@
 
                         <legend><br/>Personal Information</legend>
                         <div class="col-sm-12">
-                            {{> afQuickField name='applicantStatus' type='hidden'}}
+                            {{> afQuickField name='applicantStatus' value='Unprocessed' type='hidden'}}
                         </div>
                         <div class="col-sm-3">
                             {{> afQuickField name='dateApplied' type='hidden'}}
                         </div>
                         <div class="col-sm-12">
-                            {{> afQuickField name='positionApplied'}}
+                            {{> afQuickField name='positionApplied' value=Data.jobTitle}}
                         </div>
                         <div class="col-sm-9">
                             {{> afQuickField name='name'}}

@@ -3,11 +3,48 @@ AutoForm.hooks({
         onSuccess: function (type, id) {
             $('#statusModal').modal('hide');
             var data = StatusChange.findOne({_id:id});
+            var job = Jobs.findOne({_id:data.jobId});
+            var company = Companies.findOne({_id: job.companyId});
+
+            StatusChange.update({_id:id},{$set:{
+                companyId:company._id,
+                companyName: company.Name
+            }});
+
+            data = StatusChange.findOne({_id:id});
 
             Applicants.update({_id:applicantId},{$set:{
                 companyAssignment:data.companyName,
-                applicantStatus:data.status
+                applicantStatus:data.statusName,
+                positionApplied:data.jobName,
+                companyId:data.companyId,
+                jobId:data.jobId,
+                statusId: data.statusId
             }})
+
+            var details = "Changed Status to:<br/>";
+            var date = FormatDate(data.date, 'MMMM-DD-YYYY');
+
+               details+= '<div class="dl-horizontal">'+
+                    '<dt>Company :</dt>'+
+                    '<dd>'+data.companyName+'</dd>'+
+                    '<dt>Job Title :</dt>'+
+                    '<dd>'+data.jobName+'</dd>'+
+                    '<dt>Status :</dt>'+
+                    '<dd>'+data.statusName+'</dd>'+
+                    '<dt>Date :</dt>'+
+                    '<dd>'+date+'</dd>'+
+                '</div>';
+
+            Tracking.insert({
+                applicantID:data.applicantID,
+                applicantName:Applicants.findOne({_id:data.applicantID}).name,
+                details:details,
+                user:data.user,
+                userAvatar:data.userAvatar,
+                date: new Date()
+            })
+
         }
     }
 });
@@ -26,10 +63,14 @@ Template.statusModal.helpers({
 
 Template.statusModal.events({
     'change .form-control': function(event){
-        if(event.currentTarget.name==='companyId'){
-            $('#changeStatus input[name=companyName]').val(Companies.findOne({_id:event.currentTarget.value}).Name);
+        if(event.currentTarget.name==='jobId'){
+            $('#changeStatus input[name=jobName]').val(Jobs.findOne({_id:event.currentTarget.value}).jobTitle);
         }
-    }
+        if(event.currentTarget.name==='statusId'){
+            $('#changeStatus input[name=statusName]').val(HiringStages.findOne({_id:event.currentTarget.value}).Name);
+        }
+    },
+
 })
 
 
