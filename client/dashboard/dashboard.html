@@ -2,6 +2,7 @@
     {{>nav}}
     <div class="container">
         <div class="document">
+            <input type = "file" id="file">
             {{#each Data}}
                 <div class="panel-group">
                     <div class="panel panel-default">
@@ -12,8 +13,8 @@
                         </div>
                         <div id="company{{_id}}" class="panel-collapse collapse">
                             <div class="panel-body">
-                                {{#each Data.jobPost}}
-                                    {{name}}
+                                {{#each jobPost}}
+                                    {{jobTitle}}
                                 {{/each}}
                             </div>
                             <div class="panel-footer">Panel Footer</div>

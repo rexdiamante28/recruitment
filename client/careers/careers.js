@@ -73,11 +73,20 @@ Template.applyNow.helpers({
     },
     Data: function(){
         return Jobs.findOne({_id:jobID});
+    },
+    Resume: function(){
+        if(Files.findOne({_id:Session.get('resume')})){
+            return Files.findOne({_id:Session.get('resume')}).url();
+        }
+        else{
+            return Session.get('resume');
+        }
     }
 })
 
 Template.applyNow.onCreated(function(){
     Session.set('avatar','/defaultavatar.png');
+    Session.set('resume','empty');
 })
 
 Template.applyNow.onRendered(function (){
@@ -149,4 +158,39 @@ Template.imageModal.events({
 
     }
 
+})
+
+Template.resumeModal.events({
+    'submit form': function(event,template){
+        event.preventDefault();
+        var file = template.find('#file');
+
+        var filename = file.files[0].name;
+        filename =filename.split('.');
+
+        if(filename.length===2){
+            var exstension = filename[1];
+
+
+            if(exstension==='pdf'|| exstension==='PDF'){
+                Files.insert(file.files[0], function (err, fileObj) {
+                    if(!err){
+                        document.getElementsByName("attachmentId").item(0).value = fileObj._id;
+                        $('#resumeModal').modal('hide');
+                        Session.set('resume',fileObj._id);
+                    }
+                });
+            }
+            else
+            {
+                alert('Invalid File');
+            }
+        }
+        else
+        {
+            alert('Invalid File');
+        }
+
+
+    }
 })

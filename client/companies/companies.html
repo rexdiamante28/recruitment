@@ -35,14 +35,52 @@
     {{>nav}}
     <div class="container">
         <div class="document">
-            <legend>
-                <div class="row">
-                    <div class="col-xs-12">
-                        {{CompanyProfile.Name}} ({{CompanyProfile.companyStatus}}) <a href="/companyEdit/{{CompanyProfile._id}}" class="pull-right btn btn-primary">Edit</a>
+            <div class="col-xs-12">
+                    <ul class="breadcrumb">
+                        <li><a href="/companies">Companies</a></li>
+                        <li><a href="/companyview/{{CompanyProfile._id}}">{{CompanyProfile.Name}}</a></li>
+                    </ul>
+                <legend>
+                    <div class="row">
+                        <div class="col-xs-12">
+                            {{CompanyProfile.Name}} ({{CompanyProfile.companyStatus}}) <a href="/companyEdit/{{CompanyProfile._id}}" class="pull-right btn btn-primary">Edit</a>
+                        </div>
+                    </div>
+                </legend>
+            </div>
+
+            <div class="col-xs-12">
+                <div class="panel-group">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h4 class="panel-title">
+                                <a>{{CompanyProfile.Name}}</a>
+                                <a class="pull-right" data-toggle="collapse" href="#company{{CompanyProfile._id}}"  >See details</a>
+                            </h4>
+                        </div>
+                        <div id="company{{CompanyProfile._id}}" class="panel-collapse collapse">
+                            <div class="panel-body">
+                                {{{CompanyProfile.Description}}}
+                            </div>
+                        </div>
                     </div>
                 </div>
-            </legend>
-            {{{CompanyProfile.Description}}}
+            </div>
+
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="col-sm-12">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                Job Requirements list
+                            </div>
+                            <div class="panel-body">
+                                {{>reactiveTable settings=jobsdata}}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </template>

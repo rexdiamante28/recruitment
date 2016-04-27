@@ -13,6 +13,15 @@ AutoForm.hooks({
 
             data = StatusChange.findOne({_id:id});
 
+            if(HiringStages.findOne({_id:data.statusId}).RemoveFromPool == 'Yes'){
+                var number = parseInt(Jobs.findOne({_id:data.jobId}).hiredApplicants);
+                number++;
+
+                Jobs.update({_id:data.jobId},{$set:{
+                    hiredApplicants:number
+                }})
+            }
+
             Applicants.update({_id:applicantId},{$set:{
                 companyAssignment:data.companyName,
                 applicantStatus:data.statusName,
@@ -69,7 +78,7 @@ Template.statusModal.events({
         if(event.currentTarget.name==='statusId'){
             $('#changeStatus input[name=statusName]').val(HiringStages.findOne({_id:event.currentTarget.value}).Name);
         }
-    },
+    }
 
 })
 
@@ -97,6 +106,38 @@ Template.applicants.helpers({
     }
 })
 
+
+Template.subApplicants.helpers({
+    applicants: function () {
+        return {
+            collection: Applicants.find({companyId:companyId,jobId:jobId,statusId:statusId}),
+            rowsPerPage: 30,
+            showFilter: true,
+            fields: [
+                { key: 'name', label: 'Full Name' },
+                { key: 'sex', label: 'Gender' },
+                { key: 'positionApplied', label: 'Target Position' },
+                { key: 'applicantStatus', label: 'Status' },
+                {
+                    key: '_id',
+                    label: 'Edit',
+                    fn: function (value) {
+                        return new Spacebars.SafeString("<a href=/applicants/" + value + ">View</a>");
+                    }
+                }
+            ]
+        };
+    },
+    Company: function(){
+        return Companies.findOne({_id:companyId});
+    },
+    Job: function(){
+        return Jobs.findOne({_id: jobId});
+    },
+    Status: function(){
+        return HiringStages.findOne({_id:statusId});
+    }
+})
 
 
 Template.applicantResume.helpers({
@@ -216,7 +257,7 @@ Template.applicantResume.events({
                             [ {text: 'Date of Birth :', style:'bold'}, ''+FormatDate(applicant.dateOfBirth,'MMMM-DD-YYYY'),  ],
                         ]
                     },
-                    layout: 'noBorders',
+                    layout: 'noBorders'
 
                 },
                 {text: '\n'},
@@ -241,80 +282,88 @@ Template.applicantResume.events({
         }
 
 
-        for(var a =0; a<applicant.professionalExperience.length; a++){
+        if(applicant.professionalExperience){
+            for(var a =0; a<applicant.professionalExperience.length; a++){
+                dd.content.push({
+                    table: {
+                        headerRows: 1,
+                        widths: [100, 300],
+                        body: [
+                            [ {text: '\n Position Title :', style:'bold'}, '\n'+applicant.professionalExperience[a].Position, ],
+                            [ {text: 'Company :', style:'bold'}, ''+applicant.professionalExperience[a].Company,  ],
+                            [ {text: 'From-To :', style:'bold'}, ''+FormatDate(applicant.professionalExperience[a].From, 'MMM-DD-YYYY') +' - '+FormatDate(applicant.professionalExperience[a].To,'MMM-DD-YYYY'),  ],
+                            [ {text: 'Duties and Responsibilities :', style:'bold'}, ''+applicant.professionalExperience[a].DutiesAndResponsibilities,  ],
+                            [ {text: 'Reason for Leaving :', style:'bold'}, ''+applicant.professionalExperience[a].ReasonForLeaving,  ],
+                            [ {text: 'Salary :', style:'bold'}, ''+applicant.professionalExperience[a].Salary,  ],
+                        ]
+                    },
+                    layout: 'noBorders'
+                });
+            }
+        }
+
+        if(applicant.technicalSkills){
+            var techSkills = "";
+            for(var a =0; a<applicant.technicalSkills.length; a++){
+                techSkills+=("*"+applicant.technicalSkills[a].TechnicalSkill+"\n");
+            }
             dd.content.push({
                 table: {
                     headerRows: 1,
                     widths: [100, 300],
                     body: [
-                        [ {text: '\n Position Title :', style:'bold'}, '\n'+applicant.professionalExperience[a].Position, ],
-                        [ {text: 'Company :', style:'bold'}, ''+applicant.professionalExperience[a].Company,  ],
-                        [ {text: 'From-To :', style:'bold'}, ''+FormatDate(applicant.professionalExperience[a].From, 'MMM-DD-YYYY') +' - '+FormatDate(applicant.professionalExperience[a].To,'MMM-DD-YYYY'),  ],
-                        [ {text: 'Duties and Responsibilities :', style:'bold'}, ''+applicant.professionalExperience[a].DutiesAndResponsibilities,  ],
-                        [ {text: 'Reason for Leaving :', style:'bold'}, ''+applicant.professionalExperience[a].ReasonForLeaving,  ],
-                        [ {text: 'Salary :', style:'bold'}, ''+applicant.professionalExperience[a].Salary,  ],
+                        [ {text: 'Technical Skills :', style:'bold'}, ''+techSkills, ],
                     ]
                 },
-                layout: 'noBorders',
+                layout: 'noBorders'
             });
         }
-
-        var techSkills = "";
-        for(var a =0; a<applicant.technicalSkills.length; a++){
-           techSkills+=("*"+applicant.technicalSkills[a].TechnicalSkill+"\n");
-        }
-        dd.content.push({
-            table: {
-                headerRows: 1,
-                widths: [100, 300],
-                body: [
-                    [ {text: 'Technical Skills :', style:'bold'}, ''+techSkills, ],
-                ]
-            },
-            layout: 'noBorders',
-        });
 
         dd.content.push({text: '\n'});
         dd.content.push({canvas: [{ type: 'line', x1: 0, y1: 5, x2: 595-2*40, y2: 5, lineWidth: 1 }]});
         dd.content.push({text: 'Educational History', style:'bolder'});
 
-        for(var a =0; a<applicant.educationalHistory.length; a++){
-            dd.content.push({
-                table: {
-                    headerRows: 1,
-                    widths: [100, 300],
-                    body: [
-                        [ {text: '\nLevel :', style:'bold'}, '\n'+applicant.educationalHistory[a].Level, ],
-                        [ {text: 'Name of School :', style:'bold'}, ''+applicant.educationalHistory[a].NameOfSchool,  ],
-                        [ {text: 'Degree / Course :', style:'bold'}, ''+applicant.educationalHistory[a].DegreeOrCourse,  ],
-                        [ {text: 'School Year :', style:'bold'}, ''+applicant.educationalHistory[a].SchoolYear,  ],
-                        [ {text: 'Honors / Scholarship received :', style:'bold'}, ''+applicant.educationalHistory[a].HonorsOrScholarshipsReceived,  ],
-                    ]
-                },
-                layout: 'noBorders',
-            });
+        if(applicant.educationalHistory){
+            for(var a =0; a<applicant.educationalHistory.length; a++){
+                dd.content.push({
+                    table: {
+                        headerRows: 1,
+                        widths: [100, 300],
+                        body: [
+                            [ {text: '\nLevel :', style:'bold'}, '\n'+applicant.educationalHistory[a].Level, ],
+                            [ {text: 'Name of School :', style:'bold'}, ''+applicant.educationalHistory[a].NameOfSchool,  ],
+                            [ {text: 'Degree / Course :', style:'bold'}, ''+applicant.educationalHistory[a].DegreeOrCourse,  ],
+                            [ {text: 'School Year :', style:'bold'}, ''+applicant.educationalHistory[a].SchoolYear,  ],
+                            [ {text: 'Honors / Scholarship received :', style:'bold'}, ''+applicant.educationalHistory[a].HonorsOrScholarshipsReceived,  ],
+                        ]
+                    },
+                    layout: 'noBorders'
+                });
+            }
         }
 
         dd.content.push({text: '\n'});
         dd.content.push({canvas: [{ type: 'line', x1: 0, y1: 5, x2: 595-2*40, y2: 5, lineWidth: 1 }]});
         dd.content.push({text: 'Character References', style:'bolder'});
 
-        for(var a =0; a<applicant.characterReferences.length; a++){
-            dd.content.push({
-                table: {
-                    headerRows: 1,
-                    widths: [100, 300],
-                    body: [
-                        [ {text: '\n Name :', style:'bold'}, '\n'+applicant.characterReferences[a].Name, ],
-                        [ {text: 'Position Title :', style:'bold'}, ''+applicant.characterReferences[a].PositionTitle,  ],
-                        [ {text: 'Company :', style:'bold'}, ''+applicant.characterReferences[a].Company,  ],
-                        [ {text: 'Professional Relationship :', style:'bold'}, ''+applicant.characterReferences[a].ProfessionalRelationship,  ],
-                        [ {text: 'Contact Number :', style:'bold'}, ''+applicant.characterReferences[a].ContactNumber,  ],
-                    ]
-                },
-                layout: 'noBorders',
-            });
-        }
+       if(applicant.characterReferences){
+           for(var a =0; a<applicant.characterReferences.length; a++){
+               dd.content.push({
+                   table: {
+                       headerRows: 1,
+                       widths: [100, 300],
+                       body: [
+                           [ {text: '\n Name :', style:'bold'}, '\n'+applicant.characterReferences[a].Name, ],
+                           [ {text: 'Position Title :', style:'bold'}, ''+applicant.characterReferences[a].PositionTitle,  ],
+                           [ {text: 'Company :', style:'bold'}, ''+applicant.characterReferences[a].Company,  ],
+                           [ {text: 'Professional Relationship :', style:'bold'}, ''+applicant.characterReferences[a].ProfessionalRelationship,  ],
+                           [ {text: 'Contact Number :', style:'bold'}, ''+applicant.characterReferences[a].ContactNumber,  ],
+                       ]
+                   },
+                   layout: 'noBorders'
+               });
+           }
+       }
 
 
         // Start the pdf-generation process
