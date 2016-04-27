@@ -19,7 +19,6 @@ Template.dashboard.helpers({
                 jobPost: posts
             })
         }
-        console.log(data.find({}).fetch())
         return data.find({});
     }
 })
