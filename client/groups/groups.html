@@ -1,0 +1,34 @@
+<template name="groups">
+    {{>nav}}
+    <div class="container">
+        <div class="document">
+            <legend>
+                <div class="row">
+                    <div class="col-xs-12">
+                        Groups
+                        <a href="newgroup"><i class="fa fa-plus point fgray2 pull-right"></i></a>
+                    </div>
+                </div>
+            </legend>
+            {{> reactiveTable settings=users}}
+        </div>
+    </div>
+</template>
+
+<template name="newgroup">
+    {{>nav}}
+    <div class="container">
+        <div class="document">
+            <legend>
+                <div class="row">
+                    <div class="col-xs-12">
+                        Groups
+                        <a href="groups"><i class="fa fa-arrow-left point fgray2 pull-right"></i></a>
+                    </div>
+                </div>
+            </legend>
+            {{> quickForm collection="Groups" id="insertgroup" type="insert"}}
+        </div>
+    </div>
+</template>
+

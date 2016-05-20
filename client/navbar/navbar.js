@@ -1,5 +1,6 @@
 Template.nav.helpers({
     User: function(){
+        Meteor.subscribe('users');
         return Users.findOne({_id: sessionStorage.getItem('user_Id')});
     },
     CompanyType: function () {

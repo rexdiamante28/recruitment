@@ -10,7 +10,7 @@
                     <span class="icon-bar"></span>
                 </button>
                 <a class="navbar-brand" href="/">
-                    <img src="/logo.png">
+
                 </a>
             </div>
 
@@ -18,47 +18,19 @@
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
                     {{#if inRole 'Administrator,Level 1,Level 2'}}
-                        <li class><a href="/dashboard">Dashboard</a></li>
-                        <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Careers <span class="caret"></span></a>
-                            <ul class="dropdown-menu">
-                                <li><a href="/careers">Job Posts (Open)</a></li>
-                                <li><a href="/jobs">Jobs List</a></li>
-                                {{#if inRole 'Administrator,Level 2'}}
-                                    <li><a href="/jobsNew">Add a Job Requirement</a></li>
-                                {{/if}}
-                            </ul>
-                        </li>
-                        <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Applicants <span class="caret"></span></a>
-                            <ul class="dropdown-menu">
-                                <li><a href="/applicants">Applicants</a></li>
-                            </ul>
-                        </li>
-                        <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Others <span class="caret"></span></a>
-                            <ul class="dropdown-menu">
-                                <li><a href="/companies">Companies</a></li>
-                                    {{#if inRole 'Administrator,Level 2'}}
-                                        <li><a href="/companyNew">Add Company</a></li>
-                                    {{/if}}
-                                <li role="separator" class="divider"></li>
-                                <li><a href="/hiringStages">Hiring Stages</a></li>
-                                {{#if inRole 'Administrator,Level 2'}}
-                                    <li><a href="/hiringStageNew">New Stage</a></li>
-                                {{/if}}
-                            </ul>
-                        </li>
-                        {{#if inRole 'Administrator'}}
-                                <li class="dropdown">
-                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Users <span class="caret"></span></a>
-                                    <ul class="dropdown-menu">
-                                        <li><a href="/users">Users</a></li>
-                                    </ul>
-                                </li>
+                        <li class><a href="/dashboard">Home</a></li>
+                        <li class><a href="/contacts">Contacts</a></li>
+                        <li class><a href="/accounts">Accounts</a></li>
+                        <li class><a href="/leads">Leads</a></li>
+                        <li class><a href="/opportunities">Opportunities</a></li>
+                        <li class><a href="/customers">Customers</a></li>
+                        <li class><a href="/groups">Groups</a></li>
+                        <li class><a href="/sms">SMS</a></li>
+                        {{#if inRole 'Administrator,Level 1,Level 2'}}
+                            <li class><a href="/users">Users</a></li>
                         {{/if}}
-                        {{else}}
-                        <li class><a href="/careers">Careers <span class="sr-only">(current)</span></a></li>
+                    {{else}}
+                        <li class><a href="/">Home</a></li>
                     {{/if}}
                 </ul>
                 <ul class="nav navbar-nav navbar-right">

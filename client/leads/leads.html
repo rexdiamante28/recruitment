@@ -1,0 +1,49 @@
+<template name="leads">
+    {{>nav}}
+    <div class="container">
+        <div class="document">
+            <legend>
+                <div class="row">
+                    <div class="col-xs-12">
+                        Leads
+                        <a href="newlead"><i class="fa fa-plus point fgray2 pull-right"></i></a>
+                    </div>
+                </div>
+            </legend>
+            {{> reactiveTable settings=settings}}
+        </div>
+    </div>
+</template>
+
+<template name="newlead">
+    {{>nav}}
+    <div class="container">
+        <div class="document">
+            <legend>
+                <div class="row">
+                    <div class="col-xs-12">
+                        New Lead
+                        <a href="leads"><i class="fa fa-arrow-left point fgray2 pull-right"></i></a>
+                    </div>
+                </div>
+            </legend>
+            {{> quickForm collection="Companies" id="insertlead" type="insert"}}
+        </div>
+    </div>
+</template>
+
+<template name="companyedit">
+    {{>nav}}
+    <div class="container">
+        <div class="document">
+            <legend>
+                <div class="row">
+                    <div class="col-xs-12">
+                    </div>
+                </div>
+            </legend>
+            {{> quickForm collection="Companies" id="updatelead" doc=doc type="update"}}
+        </div>
+    </div>
+</template>
+
