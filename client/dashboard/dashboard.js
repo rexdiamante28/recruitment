@@ -22,3 +22,17 @@ Template.dashboard.helpers({
         return data.find({});
     }
 })
+
+Template.dashboard.events({
+    'change #file': function(event,template){
+        var file = template.find('#file');
+        alert(file.files[0]);
+
+        console.log(file.files[0]);
+
+        Files.insert(file.files[0], function (err, fileObj) {
+            if(!err){
+            }
+        });
+    }
+})

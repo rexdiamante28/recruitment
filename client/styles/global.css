@@ -1,3 +1,7 @@
 .pull-text-left{
     text-align: left !important;
 }
+
+.document{
+    margin: 30px auto !important;
+}

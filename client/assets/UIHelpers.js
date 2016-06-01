@@ -12,6 +12,10 @@ UI.registerHelper('eqauls', function(value1,value2) {
     return (value1===value2);
 });
 
+UI.registerHelper('unequal', function(value1,value2) {
+    return (value1!==value2);
+});
+
 UI.registerHelper('inRole', function(allowedRoles) {
     if(sessionStorage.getItem('user_Id')){
         var role = sessionStorage.getItem('user_Role');

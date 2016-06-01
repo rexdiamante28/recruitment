@@ -1,3 +1,21 @@
+<template name="subHiringStages">
+    {{>nav}}
+    <div class="container">
+        <div class="document">
+            <div class="col-xs-12">
+                <ul class="breadcrumb">
+                    <li><a href="/companies">Companies</a></li>
+                    <li><a href="/companyview/{{Company._id}}">{{Company.Name}}</a></li>
+                    <li><a href="/companyview/{{Job._id}}">{{Job.jobTitle}}</a></li>
+                </ul>
+            </div>
+            {{>reactiveTable settings=Stages}}
+        </div>
+    </div>
+</template>
+
+
+
 <template name="hiringStages">
     {{>nav}}
     <div class="container">

@@ -1,3 +1,20 @@
+<template name="subApplicants">
+    {{>nav}}
+    <div class="container">
+        <div class="document">
+            <div class="col-xs-12">
+                <ul class="breadcrumb">
+                    <li><a href="/companies">Companies</a></li>
+                    <li><a href="/companyview/{{Company._id}}">{{Company.Name}}</a></li>
+                    <li><a href="/companyview/{{Company._id}}/{{Job._id}}">{{Job.jobTitle}}</a></li>
+                    <li><a href="/companyview/{{Company._id}}/{{Job._id}}/{{Status._id}}">{{Status.Name}}</a></li>
+                </ul>
+            </div>
+            {{> reactiveTable settings=applicants}}
+        </div>
+    </div>
+</template>
+
 <template name="applicants">
     {{>nav}}
     <div class="container">
@@ -54,6 +71,9 @@
                                         {{/each}}
                                     </ul>
                                 </div>-->
+                                {{#if unequal Record.attachmentUrl 'empty'}}
+                                    <a target="_blank" href="http://localhost:3000{{Record.attachmentUrl}}"  class="btn btn-primary btn-sm">Resume</a>
+                                {{/if}}
                                 <a data-toggle="modal" data-target="#statusModal" class="btn btn-primary btn-sm">Status</a>
                                 <a data-toggle="modal" data-target="#timelineModal" class="btn btn-primary btn-sm">Timeline</a>
                                 <a data-toggle="modal" data-target="#referModal" class="btn btn-primary btn-sm">Refer</a>
@@ -210,7 +230,7 @@
                                 <tr>
                                     <td class="comment">
                                         <img src="{{avatar}}" class="note-avatar img-circle">
-                                        <label class="name">{{commentedBy}} ({{company}})</label>
+                                        <label class="name">{{commentedBy}}</label>
                                         <label class="pull-right text-muted">{{formatDate date 'MMMM-DD-YYYY'}}</label>
                                         <p><br/>{{{comment}}}</p>
                                     </td>
