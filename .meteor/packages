@@ -34,3 +34,4 @@ session
 momentjs:moment
 matb33:collection-hooks
 yogiben:autoform-file
+iron:middleware-stack@1.1.0
